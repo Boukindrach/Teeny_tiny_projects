@@ -2,57 +2,54 @@
 
 import random
 
-cards = random.randint(1, 13)
 Money = 5000
-g = ''
-h = ''
+g = 0
+total = 0
 print("You have {}$:\nHow much to bet from it?".format(Money))
 bet = input()
 
 print("Your bet is {}".format(bet))
 
-for j in range(0, 3):
-    if j == 0 or j == 2:
-        print("Dealer:".format(j))
-    else:
-        print("Player:")
-    x = random.randint(1, 13)
-    y = random.randint(1, 13)
-    if x >= 11:
-        if x == 11:
-            x = "J"
-        if x == 12:
-            x = "Q"
-        else:
-            x == "K"
-
-    type_card = random.randint(1, 4)
+def cards(type_card, number_card):
+    number_card = random.randint(1, 13)
+    type_card = random.randint(0, 4)
     if type_card == 1:
-        g = chr(9829)
+        type_card = chr(9829)
     elif type_card == 2:
-        g = chr(9830)
+        type_card = chr(9830)
     elif type_card == 3:
-        g = chr(9824)
+        type_card = chr(9824)
     else:
-        g = chr(9827)
-    if j <= 1:
-        if y >= 11:
-            if y == 11:
-                y = "j"
-            if y == 12:
-                y = "Q"
-            else:
-                y == "K"
+        type_card = chr(9827)
 
-        type_card = random.randint(1, 4)
-        if type_card == 1:
-            h = chr(9829)
-        elif type_card == 2:
-            h = chr(9830)
-        elif type_card == 3:
-            h = chr(9824)
-        else:
-            h = chr(9827)
+    if number_card == 11:
+        number_card = "J"
+    elif number_card == 12:
+        number_card = "Q"
+    elif number_card == 13:
+        number_card = "K"
 
-    print("{} {} : {} {}".format(x, g, y, h))
+    return type_card, number_card
 
+type_ = ""
+number_ = 0
+first_card = cards(type_, number_)
+if isinstance(first_card[1], int):
+    total += first_card[1]
+else:
+    total += 10
+print("""
+┌─────────┐     ┌─────────┐
+| {}       |     |         |
+|         |     |         |
+|    {}    |     |         |
+|         |     |         |
+|      {}  |     |         |
+└─────────┘     └─────────┘
+""".format(first_card[1], first_card[0], first_card[1]))
+print(first_card[0], first_card[1], total)
+
+if player_count > 21:
+    print("you lost, dealer win")
+if Dealer_count > 21:
+    print("you win, dealer lost")
